@@ -47,8 +47,19 @@
     <h1>∫₀⁰ f(x)dx = 0</h1>
     <!-- Minimal button -->
 <div style="position: relative;">
-  <!-- Button that triggers the popup -->
-  <button onclick="openForm()">Open Form</button>
+  <!-- Button that triggers the popup (minimal style) -->
+  <button
+    onclick="openForm()"
+    style="
+      border: 1px solid #000;
+      background: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+    "
+  >
+    Open Form
+  </button>
 
   <!-- Overlay behind the popup -->
   <div
@@ -85,23 +96,70 @@
       method="post"
       enctype="text/plain"
       onsubmit="closeForm()"
-      style="display: flex; flex-direction: column; gap: 0.5rem;"
+      style="
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      "
     >
       <label for="name">Name</label>
       <input id="name" name="name" required style="padding: 0.25rem;" />
 
       <label for="email">Email</label>
-      <input id="email" name="email" type="email" required style="padding: 0.25rem;" />
+      <input
+        id="email"
+        name="email"
+        type="email"
+        required
+        style="padding: 0.25rem;"
+      />
 
       <label for="phone">Phone</label>
-      <input id="phone" name="phone" type="tel" required style="padding: 0.25rem;" />
+      <input
+        id="phone"
+        name="phone"
+        type="tel"
+        required
+        style="padding: 0.25rem;"
+      />
 
       <label for="code">Code</label>
       <input id="code" name="code" required style="padding: 0.25rem;" />
 
-      <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.5rem;">
-        <button type="submit">Submit</button>
-        <button type="button" onclick="closeForm()">Close</button>
+      <!-- Minimal button styles for Submit/Close -->
+      <div
+        style="
+          display: flex;
+          justify-content: flex-end;
+          gap: 0.5rem;
+          margin-top: 0.5rem;
+        "
+      >
+        <button
+          type="submit"
+          style="
+            border: 1px solid #000;
+            background: none;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+          "
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          onclick="closeForm()"
+          style="
+            border: 1px solid #000;
+            background: none;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+          "
+        >
+          Close
+        </button>
       </div>
     </form>
   </div>
