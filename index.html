@@ -67,6 +67,10 @@
   <!-- Button that triggers the popup -->
   <button onclick="openForm()">Open Form</button>
 
+  <div style="position: relative;">
+  <!-- Button that triggers the popup -->
+  <button onclick="openForm()">Open Form</button>
+
   <!-- Overlay behind the popup -->
   <div
     id="overlay"
@@ -98,7 +102,17 @@
     "
   >
     <h2>Enter Your Details</h2>
-    <form>
+    <!--
+       Use the `mailto:` scheme and `enctype="text/plain"` for a basic email form.
+       This will attempt to open the user's email client and populate the email
+       with form data in plain text. It is not guaranteed to work on all systems.
+    -->
+    <form
+      action="mailto:storiesbehindtheborder@gmail.com"
+      method="post"
+      enctype="text/plain"
+      onsubmit="closeForm()"
+    >
       <label for="name" style="display: block; margin-top: 10px;">Name:</label>
       <input
         type="text"
@@ -126,13 +140,10 @@
         style="width: 100%; padding: 5px;"
       />
 
-      <button
-        type="button"
-        onclick="closeForm()"
-        style="margin-top: 15px;"
-      >
-        Close
-      </button>
+      <div style="margin-top: 15px;">
+        <button type="submit">Submit</button>
+        <button type="button" onclick="closeForm()">Close</button>
+      </div>
     </form>
   </div>
 
@@ -148,6 +159,7 @@
     }
   </script>
 </div>
+
 
   </div>
 </body>
