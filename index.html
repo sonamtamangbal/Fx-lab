@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none;
         }
         
         body {
@@ -21,6 +22,26 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+        }
+        
+        /* Custom cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #1a1a1a;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: transparent;
+            border: 2px solid #1a1a1a;
         }
         
         .container {
@@ -121,22 +142,6 @@
             }
         }
         
-        /* Interactive hover effect for heading */
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #1a1a1a;
-            transition: width 0.3s ease-out;
-        }
-        
-        h1:hover::after {
-            width: 100%;
-        }
-        
         /* Modal styles for About section */
         .modal {
             display: none;
@@ -196,17 +201,18 @@
     </style>
 </head>
 <body>
+    <div class="cursor"></div>
     <div class="container">
-        <h1>F(x) Lab</h1>
+        <h1>F(x)</h1>
         <button class="about-btn" onclick="showAbout()">About US</button>
     </div>
     
     <div class="modal" id="aboutModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 style="font-family: 'Kalam', cursive; font-size: 2rem; margin-bottom: 20px;">About F(x) Lab</h2>
+            <h2 style="font-family: 'Kalam', cursive; font-size: 2rem; margin-bottom: 20px;">About F(x)</h2>
             <p style="line-height: 1.6; color: #333;">
-                F(x) Lab is an innovative technology laboratory focused on pushing the boundaries of what's possible. 
+                F(x) is an innovative technology laboratory focused on pushing the boundaries of what's possible. 
                 We specialize in cutting-edge research and development, bringing creative solutions to complex problems.
             </p>
             <p style="line-height: 1.6; color: #333; margin-top: 15px;">
@@ -216,6 +222,31 @@
     </div>
     
     <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+        
+        // Add hover effect to interactive elements
+        const interactiveElements = document.querySelectorAll('button, a, .close-btn');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        });
+        
         // Interactive functionality
         function showAbout() {
             const modal = document.getElementById('aboutModal');
