@@ -1,187 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Join Us</title>
-
-  <!-- Import Oregano font from Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Oregano&display=swap" 
-    rel="stylesheet"
-  >
-
-  <style>
-    /* Reset default margins and set up flexbox centering */
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #fff;
-    }
-
-    /* Container to hold the equation and button */
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: 'Oregano', sans-serif;
-    }
-
-    /* Style the headline (the equation) */
-    h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F(x) Lab</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #fafafa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        h1 {
+            font-family: 'Kalam', cursive;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #1a1a1a;
+            font-weight: 400;
+            margin-bottom: 80px;
+            letter-spacing: 0.5px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .about-btn {
+            background-color: transparent;
+            color: #1a1a1a;
+            border: 1.5px solid #1a1a1a;
+            padding: 16px 48px;
+            font-size: 1.125rem;
+            font-weight: 400;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .about-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: #1a1a1a;
+            color: #fafafa;
+        }
+        
+        .about-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .about-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                margin-bottom: 60px;
+            }
+            
+            .about-btn {
+                padding: 14px 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                margin-bottom: 50px;
+            }
+            
+            .about-btn {
+                padding: 12px 36px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Interactive hover effect for heading */
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #1a1a1a;
+            transition: width 0.3s ease-out;
+        }
+        
+        h1:hover::after {
+            width: 100%;
+        }
+        
+        /* Modal styles for About section */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fafafa;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #1a1a1a;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Equation in Oregano font -->
-    <h1>∫₀⁰ f(x)dx = 0</h1>
-    <!-- Minimal button -->
-<div style="position: relative;">
-  <!-- Button that triggers the popup (minimal style) -->
-  <button
-    onclick="openForm()"
-    style="
-      border: 1px solid #000;
-      background: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-size: 1rem;
-    border-radius:25Px;
-    "
-  >
-    Request Join
-  </button>
-
-  <!-- Overlay behind the popup -->
-  <div
-    id="overlay"
-    style="
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
-      z-index: 999;
-    "
-    onclick="closeForm()"
-  ></div>
-
-  <!-- Popup Form -->
-  <div
-    id="popupForm"
-    style="
-      display: none;
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      padding: 1rem;
-      width: 220px;
-      z-index: 1000;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    "
-  >
-    <h3 style="margin-top: 0; font-weight: normal;">Details</h3>
-    <form
-  action="mailto:fxlab0000@gmail.com"
-  method="post"
-  enctype="text/plain"
-  onsubmit="closeForm()"
-  style="
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  "
->
-
-      <label for="name">Name</label>
-      <input id="name" name="name" required style="padding: 0.25rem;" />
-
-      <label for="email">Email</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        required
-        style="padding: 0.25rem;"
-      />
-
-      <label for="phone">Phone</label>
-      <input
-        id="phone"
-        name="phone"
-        type="tel"
-        required
-        style="padding: 0.25rem;"
-      />
-
-      <label for="code">Code</label>
-      <input id="code" name="code" required style="padding: 0.25rem;" />
-
-      <!-- Minimal button styles for Submit/Close -->
-      <div
-        style="
-          display: flex;
-          justify-content: flex-end;
-          gap: 0.5rem;
-          margin-top: 0.5rem;
-        "
-      >
-        <button
-          type="submit"
-          style="
-            border: 1px solid #000;
-            background: none;
-            padding: 0.25rem 0.5rem;
-            cursor: pointer;
-            font-size: 0.9rem;
-          "
-        >
-          Submit
-        </button>
-        <button
-          type="button"
-          onclick="closeForm()"
-          style="
-            border: 1px solid #000;
-            background: none;
-            padding: 0.25rem 0.5rem;
-            cursor: pointer;
-            font-size: 0.9rem;
-          "
-        >
-          Close
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <script>
-    function openForm() {
-      document.getElementById("overlay").style.display = "block";
-      document.getElementById("popupForm").style.display = "block";
-    }
-
-    function closeForm() {
-      document.getElementById("overlay").style.display = "none";
-      document.getElementById("popupForm").style.display = "none";
-    }
-  </script>
-</div>
-
-
-
-
-
+    <div class="container">
+        <h1>F(x) Lab in production</h1>
+        <button class="about-btn" onclick="showAbout()">About US</button>
+    </div>
+    
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 style="font-family: 'Kalam', cursive; font-size: 2rem; margin-bottom: 20px;">About F(x) Lab</h2>
+            <p style="line-height: 1.6; color: #333;">
+                F(x) Lab is an innovative technology laboratory focused on pushing the boundaries of what's possible. 
+                We specialize in cutting-edge research and development, bringing creative solutions to complex problems.
+            </p>
+            <p style="line-height: 1.6; color: #333; margin-top: 15px;">
+                Our team is passionate about creating the future through technology, design, and innovation.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Interactive functionality
+        function showAbout() {
+            const modal = document.getElementById('aboutModal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('aboutModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('aboutModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        
+        // Add ripple effect to button
+        document.querySelector('.about-btn').addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+        
+        // Add keyboard accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+    
+    <style>
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: rippleEffect 0.6s ease-out;
+            pointer-events: none;
+        }
+        
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
 </body>
 </html>
